@@ -41,3 +41,4 @@ replay_*.log
 
 /translators/input
 /translators/output
+/fabric/runs/

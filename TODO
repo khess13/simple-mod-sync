@@ -1,0 +1,30 @@
+DOCUMENTATION
+- Sync version
+- Sync
+  - Types
+  - Urls (how to obtain them)
+  - Versions
+  - Paths for packed type
+- Modify
+  - Types
+  - Patterns
+- For developers
+  - The system
+  - Handlers
+  - Contributing
+
+
+COMMON
+ - [x] Modifications
+ - [x] Auto sync
+ - [ ] Minecraft version and loader check
+ - UI
+   - [x] Update list of contents when schema parsed
+   - [x] Content type icon
+   - [x] Init screen
+   - [ ] Restart game popup
+   - [w] Translations
+   - [x] Tooltips
+
+NEOFORGE
+ - [x] module

@@ -6,6 +6,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Checkbox;
 import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.components.StringWidget;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.network.chat.Component;
@@ -34,14 +35,43 @@ public class InitScreen extends Screen {
         int centerX = this.width / 2;
         int currentY = contentStartY;
 
-        // Skip title
+        // Title widget
+        this.addRenderableWidget(new StringWidget(centerX - CONTENT_WIDTH / 2, currentY,
+                CONTENT_WIDTH, 20, this.title, this.font).alignCenter());
         currentY += 20 + SPACING;
 
-        // Skip sub-header
+        // Sub-header widget
+        Component subHeader = Component.translatable("simple_mod_sync.ui.init_screen.sub_header");
+        StringWidget subHeaderWidget = new StringWidget(centerX - CONTENT_WIDTH / 2, currentY,
+                CONTENT_WIDTH, 10, subHeader, this.font);
+        subHeaderWidget.alignCenter();
+        subHeaderWidget.setColor(0xAAAAAA);
+        this.addRenderableWidget(subHeaderWidget);
         currentY += 10 + SPACING;
 
-        // Skip disclaimer (3 lines)
-        currentY += 30 + SPACING * 2;
+        // Disclaimer line 1
+        StringWidget disclaimer1 = new StringWidget(centerX - CONTENT_WIDTH / 2, currentY,
+                CONTENT_WIDTH, 10, Component.literal("By entering a URL below, you acknowledge that you are"), this.font);
+        disclaimer1.alignCenter();
+        disclaimer1.setColor(0xAAAAAA);
+        this.addRenderableWidget(disclaimer1);
+        currentY += 10;
+
+        // Disclaimer line 2
+        StringWidget disclaimer2 = new StringWidget(centerX - CONTENT_WIDTH / 2, currentY,
+                CONTENT_WIDTH, 10, Component.literal("responsible for any content synced from that source."), this.font);
+        disclaimer2.alignCenter();
+        disclaimer2.setColor(0xAAAAAA);
+        this.addRenderableWidget(disclaimer2);
+        currentY += 10;
+
+        // Disclaimer line 3
+        StringWidget disclaimer3 = new StringWidget(centerX - CONTENT_WIDTH / 2, currentY,
+                CONTENT_WIDTH, 10, Component.literal("Use trusted sources only."), this.font);
+        disclaimer3.alignCenter();
+        disclaimer3.setColor(0xAAAAAA);
+        this.addRenderableWidget(disclaimer3);
+        currentY += 10 + SPACING * 2;
 
         // URL text field
         urlField = new EditBox(this.font, centerX - CONTENT_WIDTH / 2, currentY,
@@ -98,29 +128,6 @@ public class InitScreen extends Screen {
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
-
-        int centerX = this.width / 2;
-        int currentY = contentStartY;
-
-        // Title
-        guiGraphics.drawCenteredString(this.font, this.title, centerX, currentY, 0xFFFFFF);
-        currentY += 20 + SPACING;
-
-        // Sub-header
-        Component subHeader = Component.translatable("simple_mod_sync.ui.init_screen.sub_header");
-        guiGraphics.drawCenteredString(this.font, subHeader, centerX, currentY, 0xAAAAAA);
-        currentY += 10 + SPACING;
-
-        // Disclaimer
-        String disclaimer = "§7By entering a URL below, you acknowledge that you are";
-        String disclaimer2 = "§7responsible for any content synced from that source.";
-        String disclaimer3 = "§7Use trusted sources only.";
-
-        guiGraphics.drawCenteredString(this.font, disclaimer, centerX, currentY, 0xFFFFFF);
-        currentY += 10;
-        guiGraphics.drawCenteredString(this.font, disclaimer2, centerX, currentY, 0xFFFFFF);
-        currentY += 10;
-        guiGraphics.drawCenteredString(this.font, disclaimer3, centerX, currentY, 0xFFFFFF);
     }
 
     private void onSave() {
@@ -131,7 +138,7 @@ public class InitScreen extends Screen {
             Config.instance.setDownloadUrl("-");
         } else {
             if (!url.startsWith("http://") && !url.startsWith("https://")) {
-                urlField.setTextColor(0xFF5555);
+                urlField.setSuggestion(" Invalid URL. Try again.");
                 return;
             }
             Config.instance.setDownloadUrl(url);

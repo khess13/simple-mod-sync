@@ -6,7 +6,7 @@ import dev.oxydien.simpleModSync.content.ContentType;
 import dev.oxydien.simpleModSync.content.SyncStatus;
 import dev.oxydien.simpleModSync.content.handler.ContentHandler;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Iterator;
@@ -73,11 +73,11 @@ public class ProgressHelper {
     }
 
     public void drawStatusIcon(SyncStatus syncStatus, GuiGraphics guiGraphics, int x, int y, int margin) {
-        guiGraphics.blit(RenderType::guiTextured, this.getStateIcon(syncStatus), x + margin, y + margin, 0, 0, 10, 10, 10, 10);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, this.getStateIcon(syncStatus), x + margin, y + margin, 0, 0, 10, 10, 10, 10);
     }
 
     public void drawContentTypeIcon(ContentType type, GuiGraphics guiGraphics, int x, int y, int margin) {
-        guiGraphics.blit(RenderType::guiTextured, this.getContentTypeIcon(type), x + margin, y + margin, 0, 0, 10, 10, 10, 10);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, this.getContentTypeIcon(type), x + margin, y + margin, 0, 0, 10, 10, 10, 10);
     }
 
     public void drawLoadingIcon(GuiGraphics guiGraphics, int x, int y) {
@@ -88,7 +88,7 @@ public class ProgressHelper {
             frameOffset = 0;
         }
 
-        guiGraphics.blit(RenderType::guiTextured, LOADING_ICON, x, y, 0, 16 * frameOffset, 16, 16, 16, 128);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, LOADING_ICON, x, y, 0, 16 * frameOffset, 16, 16, 16, 128);
     }
 
     private ResourceLocation getStateIcon(SyncStatus syncStatus) {

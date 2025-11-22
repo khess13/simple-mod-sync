@@ -11,11 +11,10 @@ import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
@@ -50,7 +49,7 @@ public final class TotalSyncStatus extends AbstractWidget {
 
         if (this.isFocused() || mouseX < this.x + SIZE && mouseX > this.x && mouseY < this.y + SIZE && mouseY > this.y)
         {
-            guiGraphics.blitSprite(RenderType::guiTexturedOverlay, BACKGROUND, this.x, this.y, SIZE, SIZE);
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, BACKGROUND, this.x, this.y, SIZE, SIZE);
         }
 
         if (syncWorker == null) {

@@ -9,7 +9,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 
 import java.time.Duration;
@@ -83,7 +83,7 @@ public class ContentProgressWidget extends AbstractWidget {
     protected void renderWidget(GuiGraphics guiGraphics, int i, int i1, float v) {
         this.fetchData(); // This might not be the most optimized way
 
-        guiGraphics.fill(RenderType.guiOverlay(), this.getX(), this.getY(), this.getX() + this.getWidth(),
+        guiGraphics.fill(RenderPipelines.GUI, this.getX(), this.getY(), this.getX() + this.getWidth(),
                 this.getY() + this.getHeight(), 0xa0000000);
 
         if (this.status != null) {

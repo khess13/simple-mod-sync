@@ -7,26 +7,27 @@ import dev.oxydien.simpleModSync.content.SyncStatus;
 import dev.oxydien.simpleModSync.content.handler.ContentHandler;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.Identifier;
 
 import java.util.Iterator;
 
 public class ProgressHelper {
-    private static final ResourceLocation LOADING_ICON = ResourceLocation.tryBuild(SimpleModSync.MOD_ID, "ui/textures/icons/loading.png");
-    private static final ResourceLocation FINISHED_ICON = ResourceLocation.tryBuild(SimpleModSync.MOD_ID, "ui/textures/icons/finished.png");
-    private static final ResourceLocation PARSING_ICON = ResourceLocation.tryBuild(SimpleModSync.MOD_ID, "ui/textures/icons/parsing.png");
-    private static final ResourceLocation UNSYNCED_ICON = ResourceLocation.tryBuild(SimpleModSync.MOD_ID, "ui/textures/icons/unsynced.png");
-    private static final ResourceLocation ERROR_ICON = ResourceLocation.tryBuild(SimpleModSync.MOD_ID, "ui/textures/icons/error.png");
-    private static final ResourceLocation MODIFIED_ICON = ResourceLocation.tryBuild(SimpleModSync.MOD_ID, "ui/textures/icons/modified.png");
-    private static final ResourceLocation PREPARING_ICON = ResourceLocation.tryBuild(SimpleModSync.MOD_ID, "ui/textures/icons/preparing.png");
-    private static final ResourceLocation DOWNLOADING_ICON = ResourceLocation.tryBuild(SimpleModSync.MOD_ID, "ui/textures/icons/downloading.png");
+    private static final Identifier LOADING_ICON = Identifier.tryBuild(SimpleModSync.MOD_ID, "ui/textures/icons/loading.png");
+    private static final Identifier FINISHED_ICON = Identifier.tryBuild(SimpleModSync.MOD_ID, "ui/textures/icons/finished.png");
+    private static final Identifier PARSING_ICON = Identifier.tryBuild(SimpleModSync.MOD_ID, "ui/textures/icons/parsing.png");
+    private static final Identifier UNSYNCED_ICON = Identifier.tryBuild(SimpleModSync.MOD_ID, "ui/textures/icons/unsynced.png");
+    private static final Identifier ERROR_ICON = Identifier.tryBuild(SimpleModSync.MOD_ID, "ui/textures/icons/error.png");
+    private static final Identifier MODIFIED_ICON = Identifier.tryBuild(SimpleModSync.MOD_ID, "ui/textures/icons/modified.png");
+    private static final Identifier PREPARING_ICON = Identifier.tryBuild(SimpleModSync.MOD_ID, "ui/textures/icons/preparing.png");
+    private static final Identifier DOWNLOADING_ICON = Identifier.tryBuild(SimpleModSync.MOD_ID, "ui/textures/icons/downloading.png");
 
-    private static final ResourceLocation MOD_ICON = ResourceLocation.tryBuild(SimpleModSync.MOD_ID, "ui/textures/icons/mod.png");
-    private static final ResourceLocation RESOURCEPACK_ICON = ResourceLocation.tryBuild(SimpleModSync.MOD_ID, "ui/textures/icons/resourcepack.png");
-    private static final ResourceLocation SHADER_ICON = ResourceLocation.tryBuild(SimpleModSync.MOD_ID, "ui/textures/icons/shader.png");
-    private static final ResourceLocation DATAPACK_ICON = ResourceLocation.tryBuild(SimpleModSync.MOD_ID, "ui/textures/icons/datapack.png");
-    private static final ResourceLocation PACKED_ICON = ResourceLocation.tryBuild(SimpleModSync.MOD_ID, "ui/textures/icons/packed.png");
-    private static final ResourceLocation UNKNOWN_ICON = ResourceLocation.tryBuild(SimpleModSync.MOD_ID, "ui/textures/icons/unknown.png");
+    private static final Identifier MOD_ICON = Identifier.tryBuild(SimpleModSync.MOD_ID, "ui/textures/icons/mod.png");
+    private static final Identifier RESOURCEPACK_ICON = Identifier.tryBuild(SimpleModSync.MOD_ID, "ui/textures/icons/resourcepack.png");
+    private static final Identifier SHADER_ICON = Identifier.tryBuild(SimpleModSync.MOD_ID, "ui/textures/icons/shader.png");
+    private static final Identifier DATAPACK_ICON = Identifier.tryBuild(SimpleModSync.MOD_ID, "ui/textures/icons/datapack.png");
+    private static final Identifier PACKED_ICON = Identifier.tryBuild(SimpleModSync.MOD_ID, "ui/textures/icons/packed.png");
+    private static final Identifier UNKNOWN_ICON = Identifier.tryBuild(SimpleModSync.MOD_ID, "ui/textures/icons/unknown.png");
 
     private final SimpleModSync plugin;
     private int frameCall = 0;
@@ -91,7 +92,7 @@ public class ProgressHelper {
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, LOADING_ICON, x, y, 0, 16 * frameOffset, 16, 16, 16, 128);
     }
 
-    private ResourceLocation getStateIcon(SyncStatus syncStatus) {
+    private Identifier getStateIcon(SyncStatus syncStatus) {
         return switch (syncStatus.getState()) {
             case UNSYNCED -> UNSYNCED_ICON;
             case FINISHED -> FINISHED_ICON;
@@ -103,7 +104,7 @@ public class ProgressHelper {
         };
     }
 
-    private ResourceLocation getContentTypeIcon(ContentType type) {
+    private Identifier getContentTypeIcon(ContentType type) {
         return switch (type) {
             case ContentType.Mod -> MOD_ICON;
             case ResourcePack -> RESOURCEPACK_ICON;

@@ -36,40 +36,35 @@ public class InitScreen extends Screen {
         int currentY = contentStartY;
 
         // Title widget
-        this.addRenderableWidget(new StringWidget(centerX - CONTENT_WIDTH / 2, currentY,
-                CONTENT_WIDTH, 20, this.title, this.font).alignCenter());
+        this.addRenderableWidget(new StringWidget(this.getCenteredXFor(this.title), currentY,
+                CONTENT_WIDTH, 20, this.title, this.font));
         currentY += 20 + SPACING;
 
         // Sub-header widget
-        Component subHeader = Component.translatable("simple_mod_sync.ui.init_screen.sub_header");
-        StringWidget subHeaderWidget = new StringWidget(centerX - CONTENT_WIDTH / 2, currentY,
+        Component subHeader = Component.translatable("simple_mod_sync.ui.init_screen.sub_header").withColor(0xAAAAAA);
+        StringWidget subHeaderWidget = new StringWidget(this.getCenteredXFor(subHeader), currentY,
                 CONTENT_WIDTH, 10, subHeader, this.font);
-        subHeaderWidget.alignCenter();
-        subHeaderWidget.setColor(0xAAAAAA);
         this.addRenderableWidget(subHeaderWidget);
         currentY += 10 + SPACING;
 
         // Disclaimer line 1
-        StringWidget disclaimer1 = new StringWidget(centerX - CONTENT_WIDTH / 2, currentY,
-                CONTENT_WIDTH, 10, Component.literal("By entering a URL below, you acknowledge that you are"), this.font);
-        disclaimer1.alignCenter();
-        disclaimer1.setColor(0xAAAAAA);
+        Component dis1 = Component.literal("By entering a URL below, you acknowledge that you are").withColor(0xAAAAAA);
+        StringWidget disclaimer1 = new StringWidget(this.getCenteredXFor(dis1), currentY,
+                CONTENT_WIDTH, 10, dis1, this.font);
         this.addRenderableWidget(disclaimer1);
         currentY += 10;
 
         // Disclaimer line 2
-        StringWidget disclaimer2 = new StringWidget(centerX - CONTENT_WIDTH / 2, currentY,
-                CONTENT_WIDTH, 10, Component.literal("responsible for any content synced from that source."), this.font);
-        disclaimer2.alignCenter();
-        disclaimer2.setColor(0xAAAAAA);
+        Component dis2 = Component.literal("responsible for any content synced from that source.").withColor(0xAAAAAA);
+        StringWidget disclaimer2 = new StringWidget(this.getCenteredXFor(dis2), currentY,
+                CONTENT_WIDTH, 10, dis2, this.font);
         this.addRenderableWidget(disclaimer2);
         currentY += 10;
 
         // Disclaimer line 3
-        StringWidget disclaimer3 = new StringWidget(centerX - CONTENT_WIDTH / 2, currentY,
-                CONTENT_WIDTH, 10, Component.literal("Use trusted sources only."), this.font);
-        disclaimer3.alignCenter();
-        disclaimer3.setColor(0xAAAAAA);
+        Component dis3 = Component.literal("Use trusted sources only.").withColor(0xAAAAAA);
+        StringWidget disclaimer3 = new StringWidget(this.getCenteredXFor(dis3), currentY,
+                CONTENT_WIDTH, 10, dis3, this.font);
         this.addRenderableWidget(disclaimer3);
         currentY += 10 + SPACING * 2;
 
@@ -151,6 +146,12 @@ public class InitScreen extends Screen {
         }
 
         this.minecraft.setScreen(new TitleScreen());
+    }
+
+    private int getCenteredXFor(Component component) {
+        int centerX = this.width / 2;
+        int textWidth = this.font.width(component.getString());
+        return centerX - CONTENT_WIDTH / 2 + (CONTENT_WIDTH - textWidth) / 2;
     }
 
     @Override

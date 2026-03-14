@@ -1,6 +1,5 @@
 package dev.oxydien.simpleModSync.ui.widgets;
 
-import dev.oxydien.simpleModSync.log.Log;
 import dev.oxydien.simpleModSync.ui.ProgressHelper;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;

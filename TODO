@@ -18,6 +18,7 @@ COMMON
  - [x] Modifications
  - [x] Auto sync
  - [ ] Minecraft version and loader check
+ - [ ] Auto SMS update
  - UI
    - [x] Update list of contents when schema parsed
    - [x] Content type icon

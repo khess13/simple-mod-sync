@@ -19,8 +19,10 @@ import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -61,10 +63,9 @@ public class ContentSyncScreen extends Screen {
                 (buttonWidget) -> Minecraft.getInstance().setScreen(this.parent)).pos(3, 5).size(60, 20).build());
 
         // Title
-        Component titleText = Component.translatable("simple_mod_sync.ui.content_screen.title");
+        Component titleText = Component.translatable("simple_mod_sync.ui.content_screen.title").withColor(0xFF3DF6B4);
         this.addRenderableOnly(
-                new MultiLineTextWidget(this.width / 2 - titleText.getString().length() - 30, 10, titleText, this.font)
-                        .setColor(0xFF3DF6B4));
+                new MultiLineTextWidget(this.width / 2 - titleText.getString().length() - 30, 10, titleText, this.font));
 
         // Url field
         EditBox urlField = new EditBox(this.font, this.width / 2 - 150, 24,
@@ -275,26 +276,26 @@ public class ContentSyncScreen extends Screen {
         }
 
         @Override
-        public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
+        public boolean mouseDragged(@NotNull MouseButtonEvent event, double mouseX, double mouseY) {
             if (this.scrolling) {
-                this.scrollAmount = Mth.clamp(this.scrollAmount - dragY, 0, this.getMaxScroll());
+                this.scrollAmount = Mth.clamp(this.scrollAmount - event.x(), 0, this.getMaxScroll());
                 return true;
             }
-            return super.mouseDragged(mouseX, mouseY, button, dragX, dragY);
+            return super.mouseDragged(event, mouseX, mouseY);
         }
 
         @Override
-        public boolean mouseClicked(double mouseX, double mouseY, int button) {
-            this.scrolling = button == 0 && this.isMouseOverScrollbar(mouseX, mouseY);
-            return super.mouseClicked(mouseX, mouseY, button);
+        public boolean mouseClicked(@NotNull MouseButtonEvent event, boolean isDoubleClick) {
+            this.scrolling = event.button() == 0 && this.isMouseOverScrollbar(event.x(), event.y());
+            return super.mouseClicked(event, isDoubleClick);
         }
 
         @Override
-        public boolean mouseReleased(double mouseX, double mouseY, int button) {
-            if (button == 0) {
+        public boolean mouseReleased(@NotNull MouseButtonEvent event) {
+            if (event.button() == 0) {
                 this.scrolling = false;
             }
-            return super.mouseReleased(mouseX, mouseY, button);
+            return super.mouseReleased(event);
         }
 
         @Override

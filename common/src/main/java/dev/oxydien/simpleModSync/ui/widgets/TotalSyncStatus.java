@@ -11,9 +11,10 @@ import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.Duration;
@@ -28,7 +29,7 @@ public final class TotalSyncStatus extends AbstractWidget {
     private SyncWorker syncWorker;
     private boolean isFocused;
 
-    private static final ResourceLocation BACKGROUND = ResourceLocation.withDefaultNamespace("widget/button_disabled");
+    private static final Identifier BACKGROUND = Identifier.withDefaultNamespace("widget/button_disabled");
 
     public TotalSyncStatus(int x, int y, SyncWorker syncWorker,
                            ProgressHelper progressHelper) {
@@ -67,8 +68,8 @@ public final class TotalSyncStatus extends AbstractWidget {
     }
 
     @Override
-    public void onClick(double mouseX, double mouseY) {
-        super.onClick(mouseX, mouseY);
+    public void onClick(@NotNull MouseButtonEvent event, boolean isDoubleClick) {
+        super.onClick(event, isDoubleClick);
         Minecraft.getInstance().setScreen(new ContentSyncScreen(Component.translatable("simple_mod_sync.ui.sync_full_view.title"), null));
     }
 

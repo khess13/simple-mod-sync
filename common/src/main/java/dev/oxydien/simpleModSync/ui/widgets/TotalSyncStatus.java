@@ -6,7 +6,7 @@ import dev.oxydien.simpleModSync.ui.ProgressHelper;
 import dev.oxydien.simpleModSync.ui.screens.ContentSyncScreen;
 import dev.oxydien.simpleModSync.workers.SyncWorker;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.narration.NarratedElementType;
@@ -43,7 +43,7 @@ public final class TotalSyncStatus extends AbstractWidget {
     }
 
     @Override
-    public void renderWidget(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float v) {
+    public void extractWidgetRenderState(@NotNull GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float v) {
         if (this.syncWorker == null) {
             this.syncWorker = SimpleModSync.getInstance().syncWorker;
         }

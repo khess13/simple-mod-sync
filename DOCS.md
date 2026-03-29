@@ -36,6 +36,10 @@
 
 ### Step 1: Create Your Sync File
 
+> [!TIP]
+> While knowing how this system works is still recommended, if you don't want to 
+> do everything manually, there are **scripts that automate this process are [here](./translators/README.md).**
+
 Open any text editor (Notepad, TextEdit, etc.) and paste this template:
 
 ```json

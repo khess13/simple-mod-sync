@@ -5,7 +5,7 @@ import dev.oxydien.simpleModSync.content.Content;
 import dev.oxydien.simpleModSync.content.ContentType;
 import dev.oxydien.simpleModSync.content.SyncStatus;
 import dev.oxydien.simpleModSync.content.handler.ContentHandler;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.Identifier;
@@ -69,19 +69,19 @@ public class ProgressHelper {
         return progressSum / allElements;
     }
 
-    public void drawStatusIcon(SyncStatus syncStatus, GuiGraphics guiGraphics, int x, int y) {
+    public void drawStatusIcon(SyncStatus syncStatus, GuiGraphicsExtractor guiGraphics, int x, int y) {
         this.drawStatusIcon(syncStatus, guiGraphics, x, y, 3);
     }
 
-    public void drawStatusIcon(SyncStatus syncStatus, GuiGraphics guiGraphics, int x, int y, int margin) {
+    public void drawStatusIcon(SyncStatus syncStatus, GuiGraphicsExtractor guiGraphics, int x, int y, int margin) {
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, this.getStateIcon(syncStatus), x + margin, y + margin, 0, 0, 10, 10, 10, 10);
     }
 
-    public void drawContentTypeIcon(ContentType type, GuiGraphics guiGraphics, int x, int y, int margin) {
+    public void drawContentTypeIcon(ContentType type, GuiGraphicsExtractor guiGraphics, int x, int y, int margin) {
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, this.getContentTypeIcon(type), x + margin, y + margin, 0, 0, 10, 10, 10, 10);
     }
 
-    public void drawLoadingIcon(GuiGraphics guiGraphics, int x, int y) {
+    public void drawLoadingIcon(GuiGraphicsExtractor guiGraphics, int x, int y) {
         ++this.frameCall;
         int frameOffset = (int) (double) (this.frameCall / 6);
         if (frameOffset >= 8) {

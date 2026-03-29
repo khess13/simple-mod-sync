@@ -3,13 +3,12 @@ package dev.oxydien.simpleModSync.ui.screens;
 import dev.oxydien.simpleModSync.SimpleModSync;
 import dev.oxydien.simpleModSync.config.Config;
 import dev.oxydien.simpleModSync.content.SyncSchema;
-import dev.oxydien.simpleModSync.log.Log;
 import dev.oxydien.simpleModSync.ui.ProgressHelper;
 import dev.oxydien.simpleModSync.ui.widgets.ContentProgressWidget;
 import dev.oxydien.simpleModSync.ui.widgets.TotalSyncProgress;
 import dev.oxydien.simpleModSync.workers.SyncWorker;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.MultiLineTextWidget;
@@ -140,8 +139,8 @@ public class ContentSyncScreen extends Screen {
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        super.render(guiGraphics, mouseX, mouseY, partialTick);
+    public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
+        super.extractRenderState(guiGraphics, mouseX, mouseY, partialTick);
         if (this.worker == null && SimpleModSync.getInstance().syncWorker != null) {
             this.schema = SimpleModSync.getInstance().syncSchema;
             this.worker = SimpleModSync.getInstance().syncWorker;
@@ -149,11 +148,11 @@ public class ContentSyncScreen extends Screen {
         }
 
         if (this.contentList != null) {
-            this.contentList.render(guiGraphics, mouseX, mouseY, partialTick);
+            this.contentList.extractRenderState(guiGraphics, mouseX, mouseY, partialTick);
         }
 
         if (this.worker != null && this.worker.getStatus().isError()) {
-            guiGraphics.drawString(this.font, this.worker.getStatus().getErrorMessage(), this.width / 2 - 150, 65, 0xFFFF1C1C, false);
+            guiGraphics.text(this.font, this.worker.getStatus().getErrorMessage(), this.width / 2 - 150, 65, 0xFFFF1C1C, false);
         }
     }
 
@@ -222,7 +221,7 @@ public class ContentSyncScreen extends Screen {
         }
 
         @Override
-        public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
             // Update positions in case heights changed
             this.updatePositions();
 
@@ -231,7 +230,7 @@ public class ContentSyncScreen extends Screen {
 
             for (ContentProgressWidget widget : this.entries) {
                 if (this.isWidgetVisible(widget)) {
-                    widget.render(guiGraphics, mouseX, mouseY, partialTick);
+                    widget.extractRenderState(guiGraphics, mouseX, mouseY, partialTick);
                 }
             }
 
@@ -249,7 +248,7 @@ public class ContentSyncScreen extends Screen {
             return widgetBottom >= this.top && widgetTop <= this.top + this.height;
         }
 
-        private void renderScrollbar(GuiGraphics guiGraphics) {
+        private void renderScrollbar(GuiGraphicsExtractor guiGraphics) {
             int scrollbarX = this.left + this.width + 2;
             int scrollbarWidth = 6;
 

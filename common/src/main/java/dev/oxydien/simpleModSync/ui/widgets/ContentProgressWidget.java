@@ -5,7 +5,7 @@ import dev.oxydien.simpleModSync.content.*;
 import dev.oxydien.simpleModSync.content.handler.ContentHandler;
 import dev.oxydien.simpleModSync.ui.ProgressHelper;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
@@ -81,7 +81,7 @@ public class ContentProgressWidget extends AbstractWidget {
     }
 
     @Override
-    protected void renderWidget(GuiGraphics guiGraphics, int i, int i1, float v) {
+    protected void extractWidgetRenderState(GuiGraphicsExtractor guiGraphics, int i, int i1, float v) {
         this.fetchData(); // This might not be the most optimized way
 
         guiGraphics.fill(RenderPipelines.GUI, this.getX(), this.getY(), this.getX() + this.getWidth(),
@@ -104,7 +104,7 @@ public class ContentProgressWidget extends AbstractWidget {
 
             if (this.status.getState() == SyncStatus.SyncState.ERROR) {
                 String msg = this.status.getErrorMessage();
-                guiGraphics.drawString(this.font, String.format("§c§l%s§r", msg), this.getX() + DEFAULT_PADDING,
+                guiGraphics.text(this.font, String.format("§c§l%s§r", msg), this.getX() + DEFAULT_PADDING,
                         this.getY() + DEFAULT_PADDING * 2 + this.font.lineHeight, 0xFF55FFFF, false);
             }
         }
@@ -114,7 +114,7 @@ public class ContentProgressWidget extends AbstractWidget {
                     this.getX() + DEFAULT_PADDING, this.getY() + DEFAULT_PADDING + 12, 0);
         }
 
-        guiGraphics.drawString(this.font, String.format("§l%s§r", this.getModName()),
+        guiGraphics.text(this.font, String.format("§l%s§r", this.getModName()),
                 this.getX() + 20 + DEFAULT_PADDING, this.getY() + DEFAULT_PADDING + this.font.lineHeight / 2, 0xFF55FFFF, false);
     }
 

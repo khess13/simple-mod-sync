@@ -1,7 +1,7 @@
 package dev.oxydien.simpleModSync.ui.widgets;
 
 import dev.oxydien.simpleModSync.ui.ProgressHelper;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
@@ -15,7 +15,7 @@ public class TotalSyncProgress extends AbstractWidget {
     }
 
     @Override
-    protected void renderWidget(GuiGraphics guiGraphics, int i, int i1, float v) {
+    protected void extractWidgetRenderState(GuiGraphicsExtractor guiGraphics, int i, int i1, float v) {
         float progress = this.progressHelper.getOverallProgress();
 
         guiGraphics.fill(0, 0, (int) (((float) this.width) * progress), this.height, 0xAFFFFFFF);

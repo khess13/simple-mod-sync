@@ -18,6 +18,8 @@ public class DownloadUtils {
         for (int i = 0; i < maxRedirects; i++) {
             URL url = new URI(currentUri).toURL();
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setConnectTimeout(10_000);
+            connection.setReadTimeout(30_000);
             connection.setRequestMethod("GET");
             // setting the User-Agent header for CDNs that care about bots
             connection.setRequestProperty("User-Agent", "Mozilla/5.0 (compatible; SimpleModSync)");

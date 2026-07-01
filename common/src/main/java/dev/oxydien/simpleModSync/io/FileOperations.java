@@ -42,10 +42,13 @@ public class FileOperations {
         int maxRedirects = 10;
         String currentUri = uriString;
         URLConnection connection = null;
+        boolean resolved = false;
 
         for (int i = 0; i < maxRedirects; i++) {
             URL url = new URI(currentUri).toURL();
             connection = url.openConnection();
+            connection.setConnectTimeout(10_000);
+            connection.setReadTimeout(30_000);
 
             if (connection instanceof HttpURLConnection httpURLConnection) {
                 httpURLConnection.setRequestMethod("GET");
@@ -67,10 +70,11 @@ public class FileOperations {
                     continue;
                 }
             }
+            resolved = true;
             break; // non-HTTP connection or non-redirect response — proceed to download
         }
 
-        if (connection == null) {
+        if (!resolved) {
             throw new IOException("Too many redirects while fetching: " + uriString);
         }
 
